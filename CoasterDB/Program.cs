@@ -22,16 +22,51 @@ namespace CoasterDB
             }
         }
 
-        public static List<string[]> ReadCoasterCount(string fileName) 
+        public static List<Coaster> ReadCoasterCount(string fileName) 
         {
-            var coasterCount = new List<string[]>();
+            var coasterCount = new List<Coaster>();
             using (var reader = new StreamReader(fileName)) 
             {
                 string line = "";
+                reader.ReadLine();
                 while ((line = reader.ReadLine()) != null)
                 {
+                    var coaster = new Coaster();
                     string[] values = line.Split(',');
-                    coasterCount.Add(values);
+                    coaster.Name = values[0];
+                    coaster.Park = values[1];
+                    coaster.Type = values[2];
+                    coaster.Design = values[3];
+                    coaster.Make = values[4];
+                    double parseDouble;
+                    if (double.TryParse(values[5], out parseDouble)) 
+                    {
+                        coaster.Length = parseDouble;  
+                    }
+                    if (double.TryParse(values[6], out parseDouble))
+                    {
+                        coaster.Height = parseDouble;
+                    }
+                    if (double.TryParse(values[7], out parseDouble))
+                    {
+                        coaster.Speed = parseDouble;
+                    }
+                    int parseInt;
+                    if (int.TryParse(values[8], out parseInt)) 
+                    {
+                        coaster.Inversions = parseInt;
+                    }
+                    if (int.TryParse(values[9], out parseInt))
+                    {
+                        coaster.Year = parseInt;
+                    }
+                    Active active;
+                    if (Enum.TryParse(values[10], out active))
+                    {
+                        coaster.Active = active;
+                    }
+                    //coaster.OtherNames = values[11];
+                    coasterCount.Add(coaster);
 
                 }
             }

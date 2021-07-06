@@ -1,9 +1,9 @@
 name,park,type,design,make,length,height,speed,inversions,year,active,other names
 Adventure Express,Kings Island,Steel,Sit Down,Arrow Dynamics,2963,63,35,0,1991,active,
 Backlot Stunt Coaster,Kings Island,Steel,Sit Down,Premier Rides,1960,45.2,40,0,2005,active,Italian Job: Stunt Track
-Banshee,Kings Island,Steel,Inverted,Bolliger & Mabillard,4124,167,28,7,2014,active,
+Banshee,Kings Island,Steel,Inverted,Bolliger & Mabillard,4124,167,68,7,2014,active,
 Bat,Kings Island,Steel,Suspended,Arrow Dynamics,2352,78,51,0,1993,active,"Top Gun, Flight Deck"
-Beast,Kings Island,Wood,Sit Down,"Philadelphia Toboggan Coasters, Inc",7359,110,64.8,0,1979,active,
+Beast,Kings Island,Wood,Sit Down,Philadelphia Toboggan Coasters,7359,110,64.8,0,1979,active,
 Diamondback,Kings Island,Steel,Sit Down,Bolliger & Mabillard,5282,230,80,0,2009,active,
 Flight of Fear,Kings Island,Steel,Sit Down,Premier Rides,2705,74.2,54,4,1996,active,Outer Limits: Flight of Fear
 Flying Ace Aerial Chase,Kings Island,Steel,Inverted,Vekoma,1122,48.6,26,0,2001,active,Rugrats Runaway Reptar
@@ -11,5 +11,5 @@ Great Pumpkin Coaster,Kings Island,Steel,Sit Down,E&F Miller Industries,199.3,8,
 Invertigo,Kings Island,Steel,Inverted,Vekoma,1013.8,131.3,50,3,1999,active,Face/Off 
 Mystic Timbers,Kings Island,Wood,Sit Down,Great Coasters International,3265,109.2,53,0,2017,active,
 Orion,Kings Island,Steel,Sit Down,Bolliger & Mabillard,5321,287,91,0,2020,active,
-Racer,Kings Island,Wood,Sit Down,"Philadelphia Toboggan Coasters, Inc",3415,88,53,0,1972,active,
-Woodstock Express,Kings Island,Wood,Sit Down,"Philadelphia Toboggan Coasters, Inc",1350,38,35,0,1972,active,"Scooby Doo, Beastie, Fairly Odd Coaster "
+Racer,Kings Island,Wood,Sit Down,Philadelphia Toboggan Coasters,3415,88,53,0,1972,active,
+Woodstock Express,Kings Island,Wood,Sit Down,Philadelphia Toboggan Coasters,1350,38,35,0,1972,active,"Scooby Doo, Beastie, Fairly Odd Coaster "
