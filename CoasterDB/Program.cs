@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace CoasterDB
 {
@@ -12,6 +13,15 @@ namespace CoasterDB
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
             var fileName = Path.Combine(directory.FullName, "CoasterCount-ActiveCoasters.csv");
             var fileContents = ReadCoasterCount(fileName);
+            fileName = Path.Combine(directory.FullName, "WorldCoasters.json");
+            var worldCoasters = DeserializeWorldCoasters(fileName);
+            var topTenTallestWorldCoasters = GetTopTenTallestWorldCoasters(worldCoasters);
+            foreach (var worldCoaster in topTenTallestWorldCoasters) 
+            {
+                Console.WriteLine("Name: " + worldCoaster.Name + " Height: " + worldCoaster.Height);
+            }
+            fileName = Path.Combine(directory.FullName, "TopTenTallestWorldCoasters.json");
+            SerializeWorldCoastersToFile(topTenTallestWorldCoasters, fileName);
         }
 
         public static string ReadFile(string fileName)
@@ -71,6 +81,43 @@ namespace CoasterDB
                 }
             }
             return coasterCount;
+        }
+
+        public static List<WorldCoaster> DeserializeWorldCoasters(string fileName)
+        {
+            var worldCoasters = new List<WorldCoaster>();
+            var serializer = new JsonSerializer();
+            using (var reader = new StreamReader(fileName))
+            using (var jsonReader = new JsonTextReader(reader))
+            {
+                worldCoasters = serializer.Deserialize<List<WorldCoaster>>(jsonReader);
+            }
+                
+            return worldCoasters;
+        }
+        public static List<WorldCoaster> GetTopTenTallestWorldCoasters(List<WorldCoaster> worldCoasters) 
+        {
+            var topTenTallestWorldCoasters = new List<WorldCoaster>();
+            worldCoasters.Sort(new WorldCoasterComparer());
+            int counter = 0;
+            foreach(var worldCoaster in worldCoasters)
+            {
+                topTenTallestWorldCoasters.Add(worldCoaster);
+                counter++;
+                if (counter == 10)
+                    break;
+            }
+            return topTenTallestWorldCoasters; 
+        }
+
+        public static void SerializeWorldCoastersToFile(List<WorldCoaster> worldCoasters, string fileName) 
+        {
+            var serializer = new JsonSerializer();
+            using (var writer = new StreamWriter(fileName))
+            using (var jsonWriter = new JsonTextWriter(writer))
+            {
+                serializer.Serialize(jsonWriter, worldCoasters);
+            }
         }
     }
 }
