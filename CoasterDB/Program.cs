@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using Newtonsoft.Json;
 
 namespace CoasterDB
@@ -11,113 +12,54 @@ namespace CoasterDB
         {
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
-            var fileName = Path.Combine(directory.FullName, "CoasterCount-ActiveCoasters.csv");
-            var fileContents = ReadCoasterCount(fileName);
-            fileName = Path.Combine(directory.FullName, "WorldCoasters.json");
-            var worldCoasters = DeserializeWorldCoasters(fileName);
-            var topTenTallestWorldCoasters = GetTopTenTallestWorldCoasters(worldCoasters);
-            foreach (var worldCoaster in topTenTallestWorldCoasters) 
+            var fileName = Path.Combine(directory.FullName, "myCoasters.json");
+            var myCoasters = DeserializeMyCoasters(fileName);
+            var topTenTallestCoasters = GetTopTenTallestCoasters(myCoasters);
+            foreach(var myCoaster in topTenTallestCoasters)
             {
-                Console.WriteLine("Name: " + worldCoaster.Name + " Height: " + worldCoaster.Height);
+                Console.WriteLine("Name: " + myCoaster.Name + " Height: " + myCoaster.Height);
             }
-            fileName = Path.Combine(directory.FullName, "TopTenTallestWorldCoasters.json");
-            SerializeWorldCoastersToFile(topTenTallestWorldCoasters, fileName);
+            fileName = Path.Combine(directory.FullName, "TopTenTallestCoasters.json");
+            SerializeMyCoastersToFile(topTenTallestCoasters, fileName);
         }
 
-        public static string ReadFile(string fileName)
+        public static List<MyCoaster> DeserializeMyCoasters(string fileName)
         {
-            using (var reader = new StreamReader(fileName)) 
-            {
-                return reader.ReadToEnd();
-            }
-        }
-
-        public static List<Coaster> ReadCoasterCount(string fileName) 
-        {
-            var coasterCount = new List<Coaster>();
-            using (var reader = new StreamReader(fileName)) 
-            {
-                string line = "";
-                reader.ReadLine();
-                while ((line = reader.ReadLine()) != null)
-                {
-                    var coaster = new Coaster();
-                    string[] values = line.Split(',');
-                    coaster.Name = values[0];
-                    coaster.Park = values[1];
-                    coaster.Type = values[2];
-                    coaster.Design = values[3];
-                    coaster.Make = values[4];
-                    double parseDouble;
-                    if (double.TryParse(values[5], out parseDouble)) 
-                    {
-                        coaster.Length = parseDouble;  
-                    }
-                    if (double.TryParse(values[6], out parseDouble))
-                    {
-                        coaster.Height = parseDouble;
-                    }
-                    if (double.TryParse(values[7], out parseDouble))
-                    {
-                        coaster.Speed = parseDouble;
-                    }
-                    int parseInt;
-                    if (int.TryParse(values[8], out parseInt)) 
-                    {
-                        coaster.Inversions = parseInt;
-                    }
-                    if (int.TryParse(values[9], out parseInt))
-                    {
-                        coaster.Year = parseInt;
-                    }
-                    Active active;
-                    if (Enum.TryParse(values[10], out active))
-                    {
-                        coaster.Active = active;
-                    }
-                    //coaster.OtherNames = values[11];
-                    coasterCount.Add(coaster);
-
-                }
-            }
-            return coasterCount;
-        }
-
-        public static List<WorldCoaster> DeserializeWorldCoasters(string fileName)
-        {
-            var worldCoasters = new List<WorldCoaster>();
+            var myCoasters = new List<MyCoaster>();
             var serializer = new JsonSerializer();
+            serializer.NullValueHandling = NullValueHandling.Ignore;
             using (var reader = new StreamReader(fileName))
             using (var jsonReader = new JsonTextReader(reader))
             {
-                worldCoasters = serializer.Deserialize<List<WorldCoaster>>(jsonReader);
+                myCoasters = serializer.Deserialize<List<MyCoaster>>(jsonReader);
             }
                 
-            return worldCoasters;
+            return myCoasters;
         }
-        public static List<WorldCoaster> GetTopTenTallestWorldCoasters(List<WorldCoaster> worldCoasters) 
+        public static List<MyCoaster> GetTopTenTallestCoasters(List<MyCoaster> myCoasters)
         {
-            var topTenTallestWorldCoasters = new List<WorldCoaster>();
-            worldCoasters.Sort(new WorldCoasterComparer());
+            var topTenTallestCoasters = new List<MyCoaster>();
+            myCoasters.Sort(new MyCoasterComparer());
             int counter = 0;
-            foreach(var worldCoaster in worldCoasters)
+            foreach (var myCoaster in myCoasters)
             {
-                topTenTallestWorldCoasters.Add(worldCoaster);
+                topTenTallestCoasters.Add(myCoaster);
                 counter++;
                 if (counter == 10)
                     break;
             }
-            return topTenTallestWorldCoasters; 
+            return topTenTallestCoasters;
         }
 
-        public static void SerializeWorldCoastersToFile(List<WorldCoaster> worldCoasters, string fileName) 
+        public static void SerializeMyCoastersToFile(List<MyCoaster> myCoasters, string fileName)
         {
             var serializer = new JsonSerializer();
             using (var writer = new StreamWriter(fileName))
             using (var jsonWriter = new JsonTextWriter(writer))
             {
-                serializer.Serialize(jsonWriter, worldCoasters);
+                serializer.Serialize(jsonWriter, myCoasters);
             }
         }
+
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CoasterDB
 {
-    public class WorldCoasterComparer : IComparer<WorldCoaster>
+    public class MyCoasterComparer : IComparer<MyCoaster>
     {
-        public int Compare(WorldCoaster x, WorldCoaster y)
+        public int Compare(MyCoaster x, MyCoaster y)
         {
             return x.Height.CompareTo(y.Height) * -1;
         }

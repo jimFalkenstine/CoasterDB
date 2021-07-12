@@ -10,13 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="CoasterCount-ActiveCoasters.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="data.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="WorldCoasters.json">
+    <None Update="myCoasters.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
