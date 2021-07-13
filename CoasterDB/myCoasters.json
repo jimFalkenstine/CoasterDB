@@ -1269,7 +1269,7 @@
     "height": null,
     "speed": null,
     "inversions": 0,
-    "year": null,
+    "year": 2018,
     "status": "Operating",
     "otherNames": null,
     "country": "United States"
@@ -1677,7 +1677,7 @@
     "year": 1987,
     "status": "Removed",
     "otherNames": ["Jet Star", "Nightmare At Phantom Cave", "Nightmare at Crack Axle Canyon"],
-    "country": ""
+    "country": "United States"
   },
   {
     "name": "Vampire",
