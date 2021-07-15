@@ -12,64 +12,64 @@ namespace CoasterDB
         {
             string currentDirectory = Directory.GetCurrentDirectory();
             DirectoryInfo directory = new DirectoryInfo(currentDirectory);
-            var fileName = Path.Combine(directory.FullName, "myCoasters.json");
-            var myCoasters = DeserializeMyCoasters(fileName);
+            var fileName = Path.Combine(directory.FullName, "coasters.json");
+            var coasters = DeserializeCoasters(fileName);
 
-            var myKICoasters = from m in myCoasters
-                               where m.Park == "Kings Island"
-                               select m;
+            var kICoasters = from c in coasters
+                               where c.Park == "Kings Island"
+                               select c;
 
-            var myRemovedCoasters = from m in myCoasters
-                                    where m.Status == "Removed"
-                                    select m;
+            var removedCoasters = from c in coasters
+                                    where c.Status == "Removed"
+                                    select c;
 
-            var myCoastersByPark = from m in myCoasters
-                                   group m by m.Park;
+            var coastersByPark = from c in coasters
+                                   group c by c.Park;
 
-            var myCoastersByYear = from m in myCoasters
-                                   orderby m.Year descending
-                                   select m;
+            var coastersByYear = from c in coasters
+                                   orderby c.Year descending
+                                   select c;
 
-            //foreach (var myCoaster in myCoastersByPark)
-            //{
-            //    Console.WriteLine(myCoaster.Key + " " + myCoaster.Count());
-            //}
-
-            foreach (var myCoaster in myCoastersByYear)
+            foreach (var coaster in coastersByPark)
             {
-                Console.WriteLine("Name: " + myCoaster.Name);
-                Console.WriteLine("Park: " + myCoaster.Park);
-                Console.WriteLine();
+                Console.WriteLine(coaster.Key + " " + coaster.Count());
             }
 
+            //foreach (var coaster in coastersByPark)
+            //{
+            //    Console.WriteLine("Name: " + coaster.Name);
+            //    Console.WriteLine("Park: " + coaster.Park);
+            //    Console.WriteLine();
+            //}
+
             //    var topTenTallestCoasters = GetTopTenTallestCoasters(myCoasters);
-            //    foreach (var myCoaster in topTenTallestCoasters)
+            //    foreach (var coaster in topTenTallestCoasters)
             //    {
             //        Console.WriteLine("Name: " + myCoaster.Name + " Height: " + myCoaster.Height);
             //    }
         }
 
-        public static List<MyCoaster> DeserializeMyCoasters(string fileName)
+        public static List<Coaster> DeserializeCoasters(string fileName)
         {
-            var myCoasters = new List<MyCoaster>();
+            var coasters = new List<Coaster>();
             var serializer = new JsonSerializer();
             serializer.NullValueHandling = NullValueHandling.Ignore;
             using (var reader = new StreamReader(fileName))
             using (var jsonReader = new JsonTextReader(reader))
             {
-                myCoasters = serializer.Deserialize<List<MyCoaster>>(jsonReader);
+                coasters = serializer.Deserialize<List<Coaster>>(jsonReader);
             }
                 
-            return myCoasters;
+            return coasters;
         }
-        //public static List<MyCoaster> GetTopTenTallestCoasters(List<MyCoaster> myCoasters)
+        //public static List<Coaster> GetTopTenTallestCoasters(List<Coaster> Coasters)
         //{
-        //    var topTenTallestCoasters = new List<MyCoaster>();
-        //    myCoasters.Sort(new MyCoasterComparer());
+        //    var topTenTallestCoasters = new List<Coaster>();
+        //    myCoasters.Sort(new CoasterHeightComparer());
         //    int counter = 0;
-        //    foreach (var myCoaster in myCoasters)
+        //    foreach (var coaster in coasters)
         //    {
-        //        topTenTallestCoasters.Add(myCoaster);
+        //        topTenTallestCoasters.Add(coaster);
         //        counter++;
         //        if (counter == 10)
         //            break;

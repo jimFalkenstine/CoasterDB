@@ -3,9 +3,9 @@
 
 namespace CoasterDB
 {
-    public class MyCoasterComparer : IComparer<MyCoaster>
+    public class CoasterHeightComparer : IComparer<Coaster>
     {
-        public int Compare(MyCoaster x, MyCoaster y)
+        public int Compare(Coaster x, Coaster y)
         {
             return x.Height.CompareTo(y.Height) * -1;
         }
