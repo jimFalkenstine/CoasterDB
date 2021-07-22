@@ -27,7 +27,7 @@ namespace CoasterDB
         public string Make { get; private set; }
 
         [JsonProperty(PropertyName = "length")]
-        public double? Length { get; private set; }
+        public double Length { get; private set; }
 
         [JsonProperty(PropertyName = "height")]
         public double Height { get; private set; }
