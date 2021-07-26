@@ -1,6 +1,3 @@
-# CoasterDB
-A C# Console App that tracks Roller Coaster stats
-
 <h1>CoasterDB - The Roller Coaster Database</h1>
 <p>A C# Console Application that tracks Roller Coaster stats</p>
 
@@ -23,11 +20,11 @@ A C# Console App that tracks Roller Coaster stats
 <h3>Feature #1 - Master Loop Console Application</h3>
 <p>I created a Master Loop Console Application.  When the app loads the user is greeted with a Main Menu.  From the Main Menu the user can choose from 4 options including exiting the app.  When the user chooses an option other than Exit, a submenu is displayed with additional options.  The user can choose from these additional options or return to the Main Menu.  The Main Menu and Submenus were created using Switch Statements.</p>
 
-<h3>Feature #2 - Read Data from JSON file</h3>
+<h3>Feature #2 - Read Data from JSON File</h3>
 <p>At the heart of CoasterDB is a JSON file called coaster.json.  The JSON file contains an array of roller coaster objects.  Each coaster object includes 13 Key:Value pairs.  I created the JSON file manually because I could not find an existing JSON file or API that fulfilled my needs.  The roller coasters listed in the JSON file are ones that I have personally ridden.  Using Newtonsoft.Json, I created a method to initiate a data stream and deserialize the JSON file into a List of C# objects of the Coaster Class.</p>
 
 <h3>Feature #3 - Create a List</h3>
 <p>In addition to creating a List of Coster objects from the deserialized coasters.json file, I also created other Lists for my Top Ten Coaster Lists.  For example my GetTopTenTallestCoasters method returns a List of Coaster objects sorted by a custom CoasterHeightComparer.</p>
 
-<h3>Feature #4 - LINQ queries</h3>
+<h3>Feature #4 - LINQ Queries</h3>
 <p>All of the Coaster Counts were done using LINQ queries.  For example, in the Coaster Count by Park, I used the LINQ GroupBy method to group the Coasters by their Park property.  I also used the LINQ Take and Skip methods to partition the coasters in the Coaster Index into sets of 20.</p>
