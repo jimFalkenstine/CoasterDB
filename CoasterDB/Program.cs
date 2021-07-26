@@ -11,41 +11,6 @@ namespace CoasterDB
         static void Main(string[] args)
         {
             MainMenu();
-
-            //var KICoasters = coasters.Where(c => c.Park == "Kings Island");
-
-            //var removedCoasters = coasters.Where(c => c.Status == "Removed");
-
-            //var coastersByPark = coasters.GroupBy(c => c.Park);
-
-            //var coastersByYear = coasters.OrderByDescending(c => c.Year);
-
-            //Console.WriteLine("Enter a coaster name");
-            //string input = Console.ReadLine();
-
-            //List<Coaster> Search = coasters.FindAll(c => c.Name == input ? true : false);
-            //foreach (var coaster in coasters) 
-            //{
-
-            //}
-
-            //coasters.OrderBy(c => c.Name).Take(10);
-            //foreach (var coaster in coasters) 
-            //{
-            //    Console.WriteLine("Name: " + coaster.Name);
-            //    Console.WriteLine("Park: " + coaster.Park);
-            //    Console.WriteLine("Type: " + coaster.Type);
-            //    Console.WriteLine("Make: " + coaster.Make);
-            //    Console.WriteLine("Length: " + coaster.Length + " ft");
-            //    Console.WriteLine("Height: " + coaster.Height + " ft");
-            //    Console.WriteLine("Speed: " + coaster.Speed + " mph");
-            //    Console.WriteLine("Inversions: " + coaster.Inversions);
-            //    Console.WriteLine("Year: " + coaster.Year);
-            //    Console.WriteLine("Status: " + coaster.Status);
-            //    Console.WriteLine("Country: " + coaster.Country);
-            //    Console.WriteLine(" ");
-            //}
-
         }
 
         static void MainMenu() 
@@ -58,10 +23,10 @@ namespace CoasterDB
             Console.Clear();
             Console.WriteLine("Welcome to CoasterDB - The Roller Coaster Database");
             Console.WriteLine("");
-            Console.WriteLine("Option 1. Top Ten Coaster Lists");
-            Console.WriteLine("Option 2. Coaster Counts");
-            Console.WriteLine("Option 3. Exit");
-            Console.WriteLine("Option 4. All Coasters");
+            Console.WriteLine("Option 1. Coaster Index");
+            Console.WriteLine("Option 2. Top Ten Coaster Lists");
+            Console.WriteLine("Option 3. Coaster Counts");
+            Console.WriteLine("Option 4. Exit");
             Console.WriteLine("");
             Console.WriteLine("Please type the Option Number to navigate");
             
@@ -70,21 +35,52 @@ namespace CoasterDB
             switch (myOptions) 
             {
                 case "1":
-                    TopTenListMenu();
+                    CoasterIndexMenu();
                     break;
 
                 case "2":
-                    CoasterCountMenu();
+                    TopTenListMenu();
                     break;
 
                 case "3":
-                    System.Environment.Exit(1);
+                    CoasterCountMenu();
                     break;
 
                 case "4":
+                    System.Environment.Exit(1);
+                    break;
+            }
+
+            MainMenu();
+        }
+        static void CoasterIndexMenu()
+        {
+            string currentDirectory = Directory.GetCurrentDirectory();
+            DirectoryInfo directory = new DirectoryInfo(currentDirectory);
+            var fileName = Path.Combine(directory.FullName, "coasters.json");
+            var coasters = DeserializeCoasters(fileName);
+
+            Console.Clear();
+            Console.WriteLine("Coaster Index");
+            Console.WriteLine("");
+            Console.WriteLine("Option 1. Adventure Express - Blue Streak");
+            Console.WriteLine("Option 2. Carolina Cyclone - Gemini");
+            Console.WriteLine("Option 3. Great Pumpkin Coaster - Lightning Run");
+            Console.WriteLine("Option 4. Loch Ness Monster - Roller Skater");
+            Console.WriteLine("Option 5. Rougarou - Tigris");
+            Console.WriteLine("Option 6. Time Warp - Woodstock Express");
+            Console.WriteLine("Option 7. Return to Main Menu");
+            Console.WriteLine("");
+            Console.WriteLine("Please type the Option Number to navigate");
+
+            var coasterIndexOptions = Console.ReadLine();
+
+            switch (coasterIndexOptions)
+            {
+                case "1":
                     Console.Clear();
-                    var firstTenCoasters = coasters.OrderBy(c => c.Name).Take(10);
-                    foreach (var coaster in firstTenCoasters)
+                    var coasterIndex = coasters.OrderBy(c => c.Name).Take(20);
+                    foreach (var coaster in coasterIndex)
                     {
                         Console.WriteLine("Name: " + coaster.Name);
                         Console.WriteLine("Park: " + coaster.Park);
@@ -99,12 +95,129 @@ namespace CoasterDB
                         Console.WriteLine("Country: " + coaster.Country);
                         Console.WriteLine(" ");
                     }
-                    Console.WriteLine("Press Enter to return to the Main Menu");
+                    Console.WriteLine("Press Enter to return to Coaster Index Menu");
                     Console.ReadLine();
                     break;
-            }
 
-            MainMenu();
+                case "2":
+                    Console.Clear();
+                    var coasterIndex2 = coasters.OrderBy(c => c.Name).Skip(20).Take(20);
+                    foreach (var coaster in coasterIndex2)
+                    {
+                        Console.WriteLine("Name: " + coaster.Name);
+                        Console.WriteLine("Park: " + coaster.Park);
+                        Console.WriteLine("Type: " + coaster.Type);
+                        Console.WriteLine("Make: " + coaster.Make);
+                        Console.WriteLine("Length: " + coaster.Length + " ft");
+                        Console.WriteLine("Height: " + coaster.Height + " ft");
+                        Console.WriteLine("Speed: " + coaster.Speed + " mph");
+                        Console.WriteLine("Inversions: " + coaster.Inversions);
+                        Console.WriteLine("Year: " + coaster.Year);
+                        Console.WriteLine("Status: " + coaster.Status);
+                        Console.WriteLine("Country: " + coaster.Country);
+                        Console.WriteLine(" ");
+                    }
+                    Console.WriteLine("Press Enter to return to Coaster Index Menu");
+                    Console.ReadLine();
+                    break;
+
+                case "3":
+                    Console.Clear();
+                    var coasterIndex3 = coasters.OrderBy(c => c.Name).Skip(40).Take(20);
+                    foreach (var coaster in coasterIndex3)
+                    {
+                        Console.WriteLine("Name: " + coaster.Name);
+                        Console.WriteLine("Park: " + coaster.Park);
+                        Console.WriteLine("Type: " + coaster.Type);
+                        Console.WriteLine("Make: " + coaster.Make);
+                        Console.WriteLine("Length: " + coaster.Length + " ft");
+                        Console.WriteLine("Height: " + coaster.Height + " ft");
+                        Console.WriteLine("Speed: " + coaster.Speed + " mph");
+                        Console.WriteLine("Inversions: " + coaster.Inversions);
+                        Console.WriteLine("Year: " + coaster.Year);
+                        Console.WriteLine("Status: " + coaster.Status);
+                        Console.WriteLine("Country: " + coaster.Country);
+                        Console.WriteLine(" ");
+                    }
+                    Console.WriteLine("Press Enter to return to Coaster Index Menu");
+                    Console.ReadLine();
+                    break;
+
+                case "4":
+                    Console.Clear();
+                    var coasterIndex4 = coasters.OrderBy(c => c.Name).Skip(60).Take(20);
+                    foreach (var coaster in coasterIndex4)
+                    {
+                        Console.WriteLine("Name: " + coaster.Name);
+                        Console.WriteLine("Park: " + coaster.Park);
+                        Console.WriteLine("Type: " + coaster.Type);
+                        Console.WriteLine("Make: " + coaster.Make);
+                        Console.WriteLine("Length: " + coaster.Length + " ft");
+                        Console.WriteLine("Height: " + coaster.Height + " ft");
+                        Console.WriteLine("Speed: " + coaster.Speed + " mph");
+                        Console.WriteLine("Inversions: " + coaster.Inversions);
+                        Console.WriteLine("Year: " + coaster.Year);
+                        Console.WriteLine("Status: " + coaster.Status);
+                        Console.WriteLine("Country: " + coaster.Country);
+                        Console.WriteLine(" ");
+                    }
+                    Console.WriteLine("Press Enter to return to Coaster Index Menu");
+                    Console.ReadLine();
+                    break;
+
+                case "5":
+                    Console.Clear();
+                    var coasterIndex5 = coasters.OrderBy(c => c.Name).Skip(80).Take(20);
+                    foreach (var coaster in coasterIndex5)
+                    {
+                        Console.WriteLine("Name: " + coaster.Name);
+                        Console.WriteLine("Park: " + coaster.Park);
+                        Console.WriteLine("Type: " + coaster.Type);
+                        Console.WriteLine("Make: " + coaster.Make);
+                        Console.WriteLine("Length: " + coaster.Length + " ft");
+                        Console.WriteLine("Height: " + coaster.Height + " ft");
+                        Console.WriteLine("Speed: " + coaster.Speed + " mph");
+                        Console.WriteLine("Inversions: " + coaster.Inversions);
+                        Console.WriteLine("Year: " + coaster.Year);
+                        Console.WriteLine("Status: " + coaster.Status);
+                        Console.WriteLine("Country: " + coaster.Country);
+                        Console.WriteLine(" ");
+                    }
+                    Console.WriteLine("Press Enter to return to Coaster Index Menu");
+                    Console.ReadLine();
+                    break;
+
+                case "6":
+                    Console.Clear();
+                    var coasterIndex6 = coasters.OrderBy(c => c.Name).Skip(100).Take(20);
+                    foreach (var coaster in coasterIndex6)
+                    {
+                        Console.WriteLine("Name: " + coaster.Name);
+                        Console.WriteLine("Park: " + coaster.Park);
+                        Console.WriteLine("Type: " + coaster.Type);
+                        Console.WriteLine("Make: " + coaster.Make);
+                        Console.WriteLine("Length: " + coaster.Length + " ft");
+                        Console.WriteLine("Height: " + coaster.Height + " ft");
+                        Console.WriteLine("Speed: " + coaster.Speed + " mph");
+                        Console.WriteLine("Inversions: " + coaster.Inversions);
+                        Console.WriteLine("Year: " + coaster.Year);
+                        Console.WriteLine("Status: " + coaster.Status);
+                        Console.WriteLine("Country: " + coaster.Country);
+                        Console.WriteLine(" ");
+                    }
+                    Console.WriteLine("Press Enter to return to Coaster Index Menu");
+                    Console.ReadLine();
+                    break;
+
+                case "7":
+                    MainMenu();
+                    break;
+
+            }
+            CoasterIndexMenu();
+
+
+
         }
         static void CoasterCountMenu()
         {
@@ -234,7 +347,6 @@ namespace CoasterDB
             }
             CoasterCountMenu();
         }
-
         static void TopTenListMenu()
         {
             string currentDirectory = Directory.GetCurrentDirectory();
@@ -327,7 +439,6 @@ namespace CoasterDB
             }
             TopTenListMenu();
         }
-
         public static List<Coaster> DeserializeCoasters(string fileName)
         {
             var coasters = new List<Coaster>();
